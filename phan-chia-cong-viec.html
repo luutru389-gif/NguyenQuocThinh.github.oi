@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Phân chia công việc</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            width: 350px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('anh-truong.jpg'); 
+            background-size: cover;
+            background-position: center;
+            opacity: 0.7;
+            z-index: -1;
+        }
+
+        h2 { 
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 12px;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            letter-spacing: 0.5px;
+        }
+
+        p { 
+            margin: 12px 0;
+            padding: 15px;
+            background: rgba(248, 249, 250, 0.9);
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+            
+            /* CHỈNH CHỮ ĐẬM HƠN Ở ĐÂY */
+            color: #2c3e50;
+            font-weight: 700; 
+            font-size: 16px;
+            
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Hiệu ứng khi hover vào các ô */
+        p:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .highlight { 
+            color: #d63031;
+            font-weight: 800; /* Chữ rất đậm */
+            border: 2px solid #e74c3c;
+            background: rgba(231, 76, 60, 0.1) !important;
+            border-left: 4px solid #e74c3c;
+            font-size: 17px;
+            margin-top: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        /* Hiệu ứng nhấp nháy nhẹ cho "Một Mình Em" */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+        }
+
+        hr {
+            border: 0;
+            border-top: 2px dashed #bdc3c7;
+            margin: 25px 0;
+            opacity: 0.6;
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #3498db;
+            font-size: 15px;
+            font-weight: 700;
+            transition: 0.3s;
+            padding: 10px 20px;
+            border-radius: 50px;
+            background: rgba(52, 152, 219, 0.1);
+            border: 2px solid transparent;
+        }
+
+        .btn-back:hover {
+            color: #fff;
+            background: #3498db;
+            border: 2px solid #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        /* Thêm icon mũi tên */
+        .btn-back::before {
+            content: "← ";
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>PHÂN CHIA CÔNG VIỆC</h2>
+    <p>Nội Dung</p>
+    <p>Thiết Kế</p>
+    <p>Kiểm Tra Sửa Lỗi</p>
+    <p>Phần Thuyết Trình</p>
+    <hr>
+    <p class="highlight">MỘT MÌNH EM </p>
+    
+    <a href="index.html" class="btn-back">Quay lại trang chủ</a>
+</div>
+
+</body>
+</html>

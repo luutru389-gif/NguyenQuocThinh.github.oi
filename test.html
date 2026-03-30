@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo tường điện tử - Trường THPT Tân Hiệp</title>
+    
+    <style>
+        /* Background ảnh từ máy tính */
+        .image-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('nen-noi-dung.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.5;
+            filter: blur(1px) brightness(0.95);
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            z-index: -1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 50%, #7db9e8 100%);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        header h1 { 
+            margin: 0; 
+            font-size: 2.2em; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+        }
+
+        .link-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background-color: #27ae60;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin: 5px;
+        }
+
+        .btn-link:hover {
+            background-color: #219150;
+            transform: scale(1.05);
+        }
+
+        .main-content {
+            max-width: 900px;
+            margin: 0 auto 40px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        section { 
+            margin-bottom: 40px; 
+        }
+        
+        h2, h3 {
+            color: #2c3e50;
+            border-left: 5px solid #2989d8;
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+
+        .history-text { 
+            text-align: justify; 
+            text-indent: 30px; 
+        }
+
+        .image-box {
+            text-align: center;
+            background: #fafafa;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            margin: 0 auto 20px auto;
+            max-width: 550px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .image-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto 10px auto;
+            cursor: pointer;
+        }
+
+        .image-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+
+        /* CSS cho mục Lớp học */
+        .class-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .class-photo {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .class-photo:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* CSS cho mục Video */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #000;
+        }
+
+        .video-container iframe, .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* CSS cho phần Thông tin Liên hệ */
+        .contact-info {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 5px solid #2989d8;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .contact-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: #2989d8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            font-style: normal;
+        }
+
+        .contact-details h4 { margin: 0 0 5px 0; color: #2c3e50; }
+        .contact-details p { margin: 0; color: #555; font-size: 0.95em; }
+
+        .map-container {
+            margin-top: 40px;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            height: 400px;
+            width: 100%; /* Thêm chiều rộng 100% */
+        }
+
+        .map-placeholder iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        .email-button {
+            display: inline-block;
+            background-color: #27ae60;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .contact-form {
+            background: #eef2f7;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #27ae60;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: #e2e2e2;
+            margin-top: 20px;
+        }
+
+        /* Modal phóng to ảnh */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close-modal:hover {
+            color: #ff4757;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<script>
+function sendMessage() {
+  let name = document.getElementById("name").value;
+  let msg = document.getElementById("message").value;
+
+  if(name === "" || msg === "") {
+    alert("Nhập đủ tên và lời nhắn nhé!");
+    return;
+  }
+
+  let messages = JSON.parse(localStorage.getItem("messages")) || [];
+  messages.push({ name, msg });
+  localStorage.setItem("messages", JSON.stringify(messages));
+
+  renderMessages();
+
+  document.getElementById("message").value = "";
+}
+
+function renderMessages() {
+  let messages = JSON.parse(localStorage.getItem("messages")) || [];
+  let list = document.getElementById("message-list");
+  list.innerHTML = "";
+
+  messages.forEach(m => {
+    let box = document.createElement("div");
+    box.innerHTML = `<b>${m.name}</b>: ${m.msg}`;
+    list.appendChild(box);
+  });
+}
+
+window.onload = renderMessages;
+</script>
+
+<body>
+
+    <div class="image-background"></div>
+
+    <header>
+        <h1>TRƯỜNG THPT TÂN HIỆP</h1>
+        <p>Học tập tốt, rèn luyện tốt</p>
+    </header>
+
+    <div class="link-container">
+        <a href="phan-chia-cong-viec.html" class="btn-link">XEM PHÂN CHIA CÔNG VIỆC</a>
+    </div>
+
+    <div class="main-content">
+        <section>
+            <h2>Khái quát về lịch sử trường</h2>
+            <div class="history-text">
+                <p>Trường THPT Tân Hiệp được chính thức thành lập vào ngày 15/10/1961 với tiền thân mang tên Trường Trung học Bến Tranh. Trong giai đoạn trước năm 1975, trường đã phát triển lên hai cơ sở với điểm chính đặt tại khu vực Trung Lương hiện nay.</p>
+                <p>Sau ngày miền Nam hoàn toàn giải phóng, trường từng mang tên là Trường Trung học Bán công Châu Thành trước khi chính thức đổi tên thành Trường Phổ thông Trung học Tân Hiệp vào năm học 1976 - 1977. Đến năm 2021, trường đã long trọng tổ chức kỷ niệm 60 năm thành lập và khánh thành cơ sở mới khang trang, hiện đại.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Hình Ảnh Trường</h2>
+            <div class="image-box">
+                <img src="anh-truong.jpg" alt="Toàn cảnh trường THPT Tân Hiệp" onclick="openImageModal(this.src, this.alt)">
+                <p>Toàn cảnh khuôn viên trường THPT Tân Hiệp</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Thông Tin Liên Hệ</h2>
+            <div class="contact-info">
+                <p>Trường THPT Tân Hiệp luôn sẵn sàng đón tiếp và giải đáp mọi thắc mắc của quý phụ huynh và học sinh. Dưới đây là các thông tin liên hệ chính thức:</p>
+                
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i>📍</i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Địa chỉ</h4>
+                            <p>Ấp Thân Đức, Châu Thành, Đồng Tháp<br>Tỉnh Đổng Tháp (Tiền Giang cũ)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i>📞</i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Điện thoại</h4>
+                            <p>
+                                Văn phòng: <a href="tel:02733831310">0273 3831 310</a><br>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i>📧</i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email & Website</h4>
+                            <p>
+                                Email: <a href="mailto:c3tanhiep.tiengiang@moet.edu.vn">c3tanhiep.tiengiang@moet.edu.vn</a><br>
+                                Website: <a href="https://thpttanhiep.edu.vn" target="_blank">thpttanhiep.edu.vn</a><br>
+                                Fanpage: <a href="https://www.facebook.com/dtnthpttanhiep2018" target="_blank">Đoàn Trường THPT Tân Hiệp - Châu Thành - Đồng Tháp</a>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i>⏰</i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Giờ làm việc</h4>
+                            <p>
+                                Thứ 2 - Thứ 6: 7:00 - 17:00<br>
+                                Thứ 7: 7:00 - 12:00
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3739.778136749231!2d106.32746259566693!3d10.449375173161288!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310aba090d722775%3A0x353fd8521400db3a!2zVHLGsOG7nW5nIFRIUFQgVMOibiBIaeG7h3A!5e1!3m2!1svi!2s!4v1769650115092!5m2!1svi!2s" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <a href="mailto:thpttanhiep@edu.vn" class="email-button">📧 Gửi email liên hệ</a>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Lớp 12A1 Của Tôi</h2>
+            <p>Những gương mặt ưu tú và kỉ niệm gắn bó của tập thể lớp 12A1.</p>
+            <div class="class-grid">
+                <img src="anh1.jpg" alt="Ảnh lớp 1" class="class-photo" onclick="openImageModal(this.src, this.alt)">
+                <img src="anh2.jpg" alt="Ảnh lớp 2" class="class-photo" onclick="openImageModal(this.src, this.alt)">
+                <img src="anh3.jpg" alt="Ảnh lớp 3" class="class-photo" onclick="openImageModal(this.src, this.alt)">
+                <img src="anh4.jpg" alt="Ảnh lớp 4" class="class-photo" onclick="openImageModal(this.src, this.alt)">
+            </div>
+        </section>
+
+        <section>
+            <h2>Kỷ Niệm Khó Quên</h2>
+            <div class="video-container">
+                <video controls poster="anh-nen-video.jpg">
+                    <source src="video1.mp4" type="video/mp4">
+                </video>
+            </div>
+            <p style="margin-top: 15px; font-style: italic; text-align: center;">"Thanh xuân của chúng ta là những ngày rực rỡ dưới mái trường Tân Hiệp."</p>
+        </section>
+
+        <section>
+            <h3>Gửi Lời Tri Ân</h3>
+            <div class="contact-form">
+                <form id="thanksForm">
+                    <input type="text" id="senderName" placeholder="Họ và tên của bạn...">
+                    <textarea rows="4" id="message" placeholder="Lời nhắn nhủ dành cho thầy cô và mái trường..."></textarea>
+                    <button type="button" onclick="sendThanks()">Gửi lời nhắn</button>
+                </form>
+            </div>
+        </section>
+    </div> 
+
+    <!-- Modal phóng to ảnh -->
+    <div id="imageModal" class="image-modal">
+        <span class="close-modal" onclick="closeImageModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div id="modalCaption" style="color: white; text-align: center; padding: 10px; font-size: 18px;"></div>
+    </div>
+
+    <footer>
+        <p><b class="name-highlight">Nguyễn Quốc Thịnh</b> - Lớp <b>12A1</b></p>
+    </footer>
+
+    <script>
+        function sendThanks() {
+            const name = document.getElementById('senderName').value;
+            if(name) {
+                alert('Cảm ơn ' + name + ' đã gửi những lời chúc tốt đẹp!');
+                document.getElementById('thanksForm').reset();
+            } else {
+                alert('Vui lòng nhập tên của bạn nhé!');
+            }
+        }
+
+        // Hàm mở modal phóng to ảnh
+        function openImageModal(src, alt) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const caption = document.getElementById('modalCaption');
+            
+            modal.style.display = 'flex';
+            modalImg.src = src;
+            caption.innerHTML = alt;
+            
+            // Ngăn cuộn trang nền
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Hàm đóng modal phóng to ảnh
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
+            
+            // Khôi phục cuộn trang
+            document.body.style.overflow = 'auto';
+        }
+
+        // Đóng modal khi click bên ngoài ảnh
+        document.getElementById('imageModal').onclick = function(event) {
+            if (event.target === this) {
+                closeImageModal();
+            }
+        }
+
+        // Đóng modal bằng phím ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeImageModal();
+            }
+        });
+    </script>
+</body>
+</html>
